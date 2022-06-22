@@ -49,90 +49,9 @@ This project requires a RS485 - USB dongle which is widely available, for exampl
 * On Windows, open the ```Device Manager``` | ```Ports (COM & LPT)``` to find the ```USB-SERIAL CH340 (COMxx)``` serial port.
 * On Linux, use the ```dmesg``` command  to find the serial port, such as ```/dev/ttyUSB0```.
 
+## Software 
 
-## Software
-
-### Screenshot R421A08 relay GUI
-
-![Screenshot R421A08 Relay Control GUI](https://raw.githubusercontent.com/Erriez/R421A08-rs485-8ch-relay-board/master/screenshots/screenshot_R421A08_relay_control_gui.png)
-
-### Screenshot MODBUS GUI
-
-![Screenshot MODBUS GUI](https://raw.githubusercontent.com/Erriez/R421A08-rs485-8ch-relay-board/master/screenshots/screenshot_modbus_gui.png)
-
-### Screenshot commandline
-
-![Screenshot MODBUS GUI](https://raw.githubusercontent.com/Erriez/R421A08-rs485-8ch-relay-board/master/screenshots/screenshot_commandline.png)
-
-### Screenshot relay toggle example
-
-![Screenshot MODBUS GUI](https://raw.githubusercontent.com/Erriez/R421A08-rs485-8ch-relay-board/master/screenshots/screenshot_wxPython_relay_toggle_gui.png)
-
-
-
-## Usage ```relay_boards``` Python package
-
-[getting_started.py](https://raw.githubusercontent.com/Erriez/R421A08-rs485-8ch-relay-board/master/examples/getting_started.py)
-
-```python
-import time
-import relay_boards
-
-
-if __name__ == '__main__':
-    print('Getting started R421A08 relay board\n')
-
-    # Create MODBUS object
-    _modbus = relay_modbus.Modbus(serial_port=SERIAL_PORT)
-
-    # Open serial port
-    try:
-        _modbus.open()
-    except relay_modbus.SerialOpenException as err:
-        print(err)
-        sys.exit(1)
-
-    # Create relay board object
-    board = relay_boards.R421A08(_modbus, address=1)
-
-    print('Status all relays:')
-    check(board.print_status_all())
-    time.sleep(1)
-
-    print('Turn relay 1 on')
-    check(board.on(1))
-    time.sleep(1)
-
-    print('Turn relay 1 off')
-    check(board.off(1))
-    time.sleep(1)
-
-    print('Toggle relay 8')
-    check(board.toggle(8))
-    time.sleep(1)
-
-    print('Latch relays 6 on, all other relays off')
-    check(board.latch(6))
-    time.sleep(1)
-
-    print('Turn relay 4 on for 5 seconds, all other relays off')
-    check(board.delay(4, delay=5))
-    time.sleep(6)
-
-    print('Turn relays 3, 7 and 8 on')
-    check(board.toggle_multi([3, 7, 8]))
-    time.sleep(1)
-
-    print('Turn all relays on')
-    check(board.on_all())
-    time.sleep(1)
-
-    print('Turn all relays off')
-    check(board.off_all())
-    time.sleep(1)
-```
-
-
+See `test.py`.
 
 ## Documentation
 
